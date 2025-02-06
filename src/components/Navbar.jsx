@@ -1,17 +1,19 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user, logoutUser } = useAuth();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Sample user data (Replace with Firebase Auth later)
-  const user = {
-    displayName: "John Doe",
-    photoURL:
-      "https://npr.brightspotcdn.com/dims4/default/d44fe82/2147483647/strip/true/crop/800x1200+0+0/resize/1760x2640!/format/webp/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fwvxu%2Ffiles%2F201703%2Fjim_parsons_big_bang_theory_2016.jpg", // Example image
-  };
+  // const user = {
+  //   displayName: "John Doe",
+  //   photoURL:
+  //     "https://npr.brightspotcdn.com/dims4/default/d44fe82/2147483647/strip/true/crop/800x1200+0+0/resize/1760x2640!/format/webp/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fwvxu%2Ffiles%2F201703%2Fjim_parsons_big_bang_theory_2016.jpg", // Example image
+  // };
 
   return (
     <nav className="bg-blue-500 text-white p-4">
@@ -25,12 +27,12 @@ const Navbar = () => {
         <div className="hidden lg:flex gap-6 items-center">
           <Link to="/">Home</Link>
           <Link to="/all-visas">All Visas</Link>
-          {isLoggedIn && <Link to="/add-visa">Add Visa</Link>}
-          {isLoggedIn && <Link to="/my-visas">My Added Visas</Link>}
-          {isLoggedIn && <Link to="/my-applications">My Applications</Link>}
+          {user && <Link to="/add-visa">Add Visa</Link>}
+          {user && <Link to="/my-visas">My Added Visas</Link>}
+          {user && <Link to="/my-applications">My Applications</Link>}
 
           {/* Conditional Login/Register */}
-          {!isLoggedIn ? (
+          {!user ? (
             <>
               <Link
                 to="/login"
@@ -50,7 +52,7 @@ const Navbar = () => {
                 {user.displayName}
               </div>
               <button
-                onClick={() => setIsLoggedIn(false)}
+                onClick={() => logoutUser()}
                 className="btn ml-4 bg-red-500 px-4 py-1 rounded"
               >
                 Logout
@@ -77,24 +79,24 @@ const Navbar = () => {
           <Link to="/all-visas" onClick={() => setIsMenuOpen(false)}>
             All Visas
           </Link>
-          {isLoggedIn && (
+          {user && (
             <Link to="/add-visa" onClick={() => setIsMenuOpen(false)}>
               Add Visa
             </Link>
           )}
-          {isLoggedIn && (
+          {user && (
             <Link to="/my-visas" onClick={() => setIsMenuOpen(false)}>
               My Added Visas
             </Link>
           )}
-          {isLoggedIn && (
+          {user && (
             <Link to="/my-applications" onClick={() => setIsMenuOpen(false)}>
               My Applications
             </Link>
           )}
 
           {/* Conditional Login/Register */}
-          {!isLoggedIn ? (
+          {!user ? (
             <>
               <Link to="/login" onClick={() => setIsMenuOpen(false)}>
                 Login

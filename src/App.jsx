@@ -6,8 +6,8 @@ function App() {
   return (
     <>
       <Navbar></Navbar>
-      <Footer></Footer>
       <Outlet></Outlet>
+      <Footer></Footer>
     </>
   );
 }
