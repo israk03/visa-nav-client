@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { toast } from "react-toastify";
+
+import { Fade } from "react-awesome-reveal";
 
 const MyApplications = () => {
   const { user } = useAuth();
@@ -30,95 +31,57 @@ const MyApplications = () => {
     app?.countryName?.toLowerCase()?.includes(searchTerm.toLowerCase())
   );
 
-  // Cancel Visa Application
-  const handleCancel = (id) => {
-    fetch(`http://localhost:3000/application/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then(() => {
-        toast.success("Application canceled successfully!");
-        setApplications((prevApps) => prevApps.filter((app) => app._id !== id));
-      })
-      .catch(() => toast.error("Error canceling application"));
-  };
-
   if (loading) return <LoadingSpinner />;
 
   return (
     <div className="container mx-auto">
-      <h2 className="text-3xl font-bold text-center my-6">
-        My Visa Applications
-      </h2>
+      <Fade>
+        <h2 className="text-3xl font-bold text-center my-6">
+          My Visa Applications
+        </h2>
+      </Fade>
 
       {/* Search Bar */}
-      <div className="text-center mb-4">
-        <input
-          type="text"
-          placeholder="Search by Country Name"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="border p-2 rounded w-full md:w-1/2"
-        />
-      </div>
+      <Fade>
+        <div className="text-center mb-4">
+          <input
+            type="text"
+            placeholder="Search by Country Name"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="border p-2 rounded w-full md:w-1/2"
+          />
+        </div>
+      </Fade>
 
       {filteredApplications.length === 0 ? (
-        <p className="text-center">No applications found.</p>
+        <Fade>
+          <p className="text-center">No applications found.</p>
+        </Fade>
       ) : (
-        <ul className="space-y-4">
-          {filteredApplications.map((app) => (
-            <li key={app._id} className="border p-4 shadow rounded-lg">
-              {/* Country Image */}
-              {app.countryImage && (
-                <img
-                  src={app.countryImage}
-                  alt={app.countryName}
-                  className="w-full h-40 object-cover rounded-lg"
-                />
-              )}
-
-              {/* Visa Information */}
-              <h3 className="text-xl font-bold mt-2">
-                {app.countryName || "Unknown Country"}
-              </h3>
-              <p>
-                <strong>Visa Type:</strong> {app.visaType || "N/A"}
-              </p>
-              <p>
-                <strong>Processing Time:</strong> {app.processingTime || "N/A"}
-              </p>
-              <p>
-                <strong>Fee:</strong> ${app.fee || "N/A"}
-              </p>
-              <p>
-                <strong>Validity:</strong> {app.validity || "N/A"}
-              </p>
-              <p>
-                <strong>Application Method:</strong>{" "}
-                {app.applicationMethod || "N/A"}
-              </p>
-              <p>
-                <strong>Applied Date:</strong>{" "}
-                {new Date(app.appliedAt).toLocaleDateString()}
-              </p>
-              <p>
-                <strong>Applicant Name:</strong>{" "}
-                {`${app.firstName || "N/A"} ${app.lastName || ""}`}
-              </p>
-              <p>
-                <strong>Applicant Email:</strong> {app.email || "N/A"}
-              </p>
-
-              {/* Cancel Button */}
-              <button
-                onClick={() => handleCancel(app._id)}
-                className="mt-2 bg-red-500 text-white px-4 py-2 rounded"
-              >
-                Cancel Application
-              </button>
-            </li>
-          ))}
-        </ul>
+        <Fade cascade>
+          <ul className="space-y-4">
+            {filteredApplications.map((app) => (
+              <li key={app._id} className="border p-4 shadow rounded-lg">
+                <h3 className="text-xl font-bold">
+                  {app.countryName || "Unknown Country"}
+                </h3>
+                <p>
+                  <strong>Visa Type:</strong> {app.visaType}
+                </p>
+                <p>
+                  <strong>Status:</strong> {app.status}
+                </p>
+                <p>
+                  <strong>Applied Date:</strong> {app.appliedAt}
+                </p>
+                <button className="mt-2 bg-red-500 text-white px-4 py-2 rounded">
+                  Cancel
+                </button>
+              </li>
+            ))}
+          </ul>
+        </Fade>
       )}
     </div>
   );
