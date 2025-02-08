@@ -52,7 +52,10 @@ const VisaDetails = () => {
       <p>
         <strong>Description:</strong> {visa.description}
       </p>
-      <button className="mt-4 bg-green-500 text-white px-4 py-2 rounded">
+      <button
+        onClick={handleApply}
+        className="mt-4 bg-green-500 text-white px-4 py-2 rounded"
+      >
         Apply for Visa
       </button>
     </div>
