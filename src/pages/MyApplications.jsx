@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import LoadingSpinner from "../components/LoadingSpinner";
-
 import { Fade } from "react-awesome-reveal";
+import { toast } from "react-toastify";
 
 const MyApplications = () => {
   const { user } = useAuth();
@@ -10,6 +10,7 @@ const MyApplications = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
 
+  // Fetch applications for the logged-in user
   useEffect(() => {
     if (user) {
       fetch(`http://localhost:3000/applications/${user.email}`)
@@ -26,7 +27,21 @@ const MyApplications = () => {
     }
   }, [user]);
 
-  // Search Filter
+  // Cancel button functionality
+  const handleCancel = (id) => {
+    fetch(`http://localhost:3000/application/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then(() => {
+        toast.success("Application cancelled!");
+        // Instantly update the UI by filtering out the canceled application
+        setApplications((prev) => prev.filter((app) => app._id !== id));
+      })
+      .catch(() => toast.error("Error cancelling application"));
+  };
+
+  // Search filter
   const filteredApplications = applications.filter((app) =>
     app?.countryName?.toLowerCase()?.includes(searchTerm.toLowerCase())
   );
@@ -76,7 +91,10 @@ const MyApplications = () => {
                   <strong>Applied Date:</strong>{" "}
                   {new Date(app?.appliedAt).toLocaleDateString() || "N/A"}
                 </p>
-                <button className="mt-2 bg-red-500 text-white px-4 py-2 rounded">
+                <button
+                  onClick={() => handleCancel(app._id)}
+                  className="mt-2 bg-red-500 text-white px-4 py-2 rounded"
+                >
                   Cancel
                 </button>
               </li>
