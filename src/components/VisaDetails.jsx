@@ -95,7 +95,7 @@ const VisaDetails = () => {
         <strong>Fee:</strong> ${visa.fee}
       </p>
       <p>
-        <strong>Validity:</strong> {visa.validity}
+        <strong>Validity:</strong> {visa.validity} months
       </p>
       <p>
         <strong>Description:</strong> {visa.description}
