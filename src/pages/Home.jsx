@@ -25,29 +25,50 @@ const Home = () => {
   return (
     <div className="container mx-auto px-4">
       {/*  Banner */}
-      <div className="my-8">
-        <Carousel
-          className="w-full"
-          showThumbs={false}
-          autoPlay
-          interval={3000}
-          infiniteLoop
-        >
-          <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px]">
-            <img src={banner1} alt="Banner 1" />
+      <div className="relative my-8 overflow-hidden">
+        <div className="flex space-x-4 overflow-x-scroll snap-x snap-mandatory scrollbar-hide">
+          <div className="snap-center flex-shrink-0 w-full h-[400px] md:h-[500px] lg:h-[600px] relative">
+            <img
+              src={banner1}
+              alt="Banner 1"
+              className="w-full h-full object-cover rounded-lg shadow-md"
+            />
+            {/* <div className="absolute inset-0 bg-black bg-opacity-25 flex items-center justify-center">
+              <h2 className="text-white text-3xl md:text-5xl font-bold">
+                Welcome to Visa Navigator
+              </h2>
+            </div> */}
           </div>
-          <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px]">
-            <img src={banner2} alt="Banner 2" />
+          <div className="snap-center flex-shrink-0 w-full h-[400px] md:h-[500px] lg:h-[600px] relative">
+            <img
+              src={banner2}
+              alt="Banner 2"
+              className="w-full h-full object-cover rounded-lg shadow-md"
+            />
+            {/* <div className="absolute inset-0 bg-black bg-opacity-25 flex items-center justify-center">
+              <h2 className="text-white text-3xl md:text-5xl font-bold">
+                Hassle-Free Visa Applications
+              </h2>
+            </div> */}
           </div>
-          <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px]">
-            <img src={banner3} alt="Banner 3" />
+          <div className="snap-center flex-shrink-0 w-full h-[400px] md:h-[500px] lg:h-[600px] relative">
+            <img
+              src={banner3}
+              alt="Banner 3"
+              className="w-full h-full object-cover rounded-lg shadow-md"
+            />
+            {/* <div className="absolute inset-0 bg-black bg-opacity-25 flex items-center justify-center">
+              <h2 className="text-white text-3xl md:text-5xl font-bold">
+                Explore the World with Ease
+              </h2>
+            </div> */}
           </div>
-        </Carousel>
+        </div>
       </div>
 
       {/*  Animation */}
       <div className="flex justify-center items-center my-10">
-        <Lottie animationData={visaAnimation} className="w-72 h-72" />
+        <Lottie animationData={visaAnimation} className="w-50 h-50" />
       </div>
 
       {/*  Latest Visas Section */}
