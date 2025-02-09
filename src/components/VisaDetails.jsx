@@ -75,7 +75,7 @@ const VisaDetails = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto border p-6 shadow-lg rounded-lg">
+    <div className="max-w-2xl mx-auto border p-6 shadow-lg rounded-lg mt-8">
       {/* Visa Details */}
       {visa.countryImage && (
         <img
@@ -104,7 +104,7 @@ const VisaDetails = () => {
       {/* Apply for Visa Button */}
       <button
         onClick={() => setShowApplyModal(true)}
-        className="mt-4 bg-green-500 text-white px-4 py-2 rounded"
+        className="mt-4 btn bg-white text-blue-500 px-4 py-1 rounded"
       >
         Apply for Visa
       </button>

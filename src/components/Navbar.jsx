@@ -46,7 +46,7 @@ const Navbar = () => {
               </div>
               <button
                 onClick={() => logoutUser()}
-                className="btn ml-4 bg-red-500 px-4 py-1 rounded"
+                className="btn bg-white text-blue-500 px-4 py-1 rounded"
               >
                 Logout
               </button>
@@ -107,7 +107,7 @@ const Navbar = () => {
               </div>
               <button
                 onClick={() => setIsLoggedIn(false)}
-                className="bg-red-500 px-4 py-1 rounded mt-2"
+                className="btn bg-white text-blue-500 px-4 py-1 rounded"
               >
                 Logout
               </button>
