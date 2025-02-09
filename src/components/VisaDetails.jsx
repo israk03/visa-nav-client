@@ -25,10 +25,10 @@ const VisaDetails = () => {
     const fetchVisa = async () => {
       try {
         const response = await fetch(`http://localhost:3000/visa/${id}`);
-        console.log("Response:", response);
+        // console.log("Response:", response);
         if (!response.ok) throw new Error("Failed to load visa details");
         const data = await response.json();
-        console.log("Data:", data);
+        // console.log("Data:", data);
         setVisa(data);
       } catch (error) {
         console.error(error);
