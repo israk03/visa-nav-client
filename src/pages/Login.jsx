@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 
@@ -9,15 +9,18 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const { loginUser, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await loginUser(email, password);
       toast.success("Login successful!");
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (error) {
-      toast.error(error);
+      toast.error(error.message || "Login failed");
     }
   };
 
@@ -25,9 +28,9 @@ const Login = () => {
     try {
       await signInWithGoogle();
       toast.success("Login successful!");
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (error) {
-      toast.error(error);
+      toast.error(error.message || "Google login failed");
     }
   };
 
