@@ -8,13 +8,6 @@ const Navbar = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Sample user data (Replace with Firebase Auth later)
-  // const user = {
-  //   displayName: "John Doe",
-  //   photoURL:
-  //     "https://npr.brightspotcdn.com/dims4/default/d44fe82/2147483647/strip/true/crop/800x1200+0+0/resize/1760x2640!/format/webp/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fwvxu%2Ffiles%2F201703%2Fjim_parsons_big_bang_theory_2016.jpg", // Example image
-  // };
-
   return (
     <nav className="bg-blue-500 text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
@@ -100,9 +93,6 @@ const Navbar = () => {
             <>
               <Link to="/login" onClick={() => setIsMenuOpen(false)}>
                 Login
-              </Link>
-              <Link to="/register" onClick={() => setIsMenuOpen(false)}>
-                Register
               </Link>
             </>
           ) : (

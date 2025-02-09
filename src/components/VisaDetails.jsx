@@ -1,43 +1,16 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 
-export const visaDetailsLoader = async ({ params }) => {
-  const response = await fetch(`http://localhost:3000/visa/${params.id}`);
-  if (!response.ok) throw new Error("Failed to load visa details");
-  return response.json();
-};
-
 const VisaDetails = () => {
+  const { id } = useParams(); // Get the Visa ID from the URL params
+  console.log("Visa ID:", id);
   const navigate = useNavigate();
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [visa, setVisa] = useState(null);
   const [showApplyModal, setShowApplyModal] = useState(false);
-
-  // Fetch visa data
-  useEffect(() => {
-    const fetchVisa = async () => {
-      try {
-        const response = await fetch(
-          window.location.pathname.replace(
-            "/visa/",
-            "http://localhost:3000/visa/"
-          )
-        );
-        if (!response.ok) throw new Error("Failed to load visa details");
-        const data = await response.json();
-        setVisa(data);
-      } catch (error) {
-        toast.error("Error fetching visa details");
-      } finally {
-        setLoading(false);
-        console.log(loading);
-      }
-    };
-    fetchVisa();
-  }, []);
 
   // Redirect if user is not logged in
   useEffect(() => {
@@ -46,6 +19,26 @@ const VisaDetails = () => {
       navigate("/login");
     }
   }, [user, navigate]);
+
+  // Fetch visa details
+  useEffect(() => {
+    const fetchVisa = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/visa/${id}`);
+        console.log("Response:", response);
+        if (!response.ok) throw new Error("Failed to load visa details");
+        const data = await response.json();
+        console.log("Data:", data);
+        setVisa(data);
+      } catch (error) {
+        console.error(error);
+        toast.error("Error fetching visa details");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchVisa();
+  }, [id]);
 
   if (loading) {
     return <p className="text-center text-red-500">Loading visa details...</p>;
@@ -81,6 +74,7 @@ const VisaDetails = () => {
 
   return (
     <div className="max-w-2xl mx-auto border p-6 shadow-lg rounded-lg">
+      {/* Visa Details */}
       {visa.countryImage && (
         <img
           src={visa.countryImage}
@@ -105,6 +99,7 @@ const VisaDetails = () => {
         <strong>Description:</strong> {visa.description}
       </p>
 
+      {/* Apply for Visa Button */}
       <button
         onClick={() => setShowApplyModal(true)}
         className="mt-4 bg-green-500 text-white px-4 py-2 rounded"
@@ -112,6 +107,7 @@ const VisaDetails = () => {
         Apply for Visa
       </button>
 
+      {/* Apply Modal */}
       {showApplyModal && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-md max-w-lg">
