@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 
 const VisaDetails = () => {
-  const { id } = useParams(); // Get the Visa ID from the URL params
-  console.log("Visa ID:", id);
+  const { id } = useParams();
+  // console.log("Visa ID:", id);
   const navigate = useNavigate();
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
@@ -55,6 +55,8 @@ const VisaDetails = () => {
       firstName: e.target.firstName.value,
       lastName: e.target.lastName.value,
       appliedAt: new Date(),
+      countryName: visa.countryName,
+      visaType: visa.visaType,
       visaFee: visa.fee,
       status: "Pending",
     };

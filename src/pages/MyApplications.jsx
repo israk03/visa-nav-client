@@ -64,16 +64,17 @@ const MyApplications = () => {
             {filteredApplications.map((app) => (
               <li key={app._id} className="border p-4 shadow rounded-lg">
                 <h3 className="text-xl font-bold">
-                  {app.countryName || "Unknown Country"}
+                  {app?.countryName || "Unknown Country"}
                 </h3>
                 <p>
-                  <strong>Visa Type:</strong> {app.visaType}
+                  <strong>Visa Type:</strong> {app?.visaType || "N/A"}
                 </p>
                 <p>
-                  <strong>Status:</strong> {app.status}
+                  <strong>Status:</strong> {app?.status || "Pending"}
                 </p>
                 <p>
-                  <strong>Applied Date:</strong> {app.appliedAt}
+                  <strong>Applied Date:</strong>{" "}
+                  {new Date(app?.appliedAt).toLocaleDateString() || "N/A"}
                 </p>
                 <button className="mt-2 bg-red-500 text-white px-4 py-2 rounded">
                   Cancel
