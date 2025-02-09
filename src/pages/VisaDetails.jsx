@@ -4,7 +4,9 @@ import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 
 export const visaDetailsLoader = async ({ params }) => {
-  const response = await fetch(`http://localhost:3000/visa/${params.id}`);
+  const response = await fetch(
+    `https://visa-nav-server.vercel.app/visa/${params.id}`
+  );
   return response.json();
 };
 
@@ -41,7 +43,7 @@ const VisaDetails = () => {
       status: "Pending",
     };
 
-    fetch("http://localhost:3000/apply", {
+    fetch("https://visa-nav-server.vercel.app/apply", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(applicationData),

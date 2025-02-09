@@ -13,7 +13,7 @@ const UpdateVisaModal = ({ visa, closeModal, setVisas, visas }) => {
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:3000/visa/${visa._id}`, {
+    fetch(`https://visa-nav-server.vercel.app/visa/${visa._id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),

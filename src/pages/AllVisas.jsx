@@ -11,7 +11,7 @@ const AllVisas = () => {
 
   // Fetch all visas from the backend
   useEffect(() => {
-    fetch("http://localhost:3000/all-visas")
+    fetch("https://visa-nav-server.vercel.app/all-visas")
       .then((res) => res.json())
       .then((data) => {
         setVisas(data);

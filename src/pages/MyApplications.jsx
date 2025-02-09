@@ -13,7 +13,7 @@ const MyApplications = () => {
   // Fetch applications for the logged-in user
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:3000/applications/${user.email}`)
+      fetch(`https://visa-nav-server.vercel.app/applications/${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           setApplications(Array.isArray(data) ? data : []);
@@ -29,7 +29,7 @@ const MyApplications = () => {
 
   // Cancel button functionality
   const handleCancel = (id) => {
-    fetch(`http://localhost:3000/application/${id}`, {
+    fetch(`https://visa-nav-server.vercel.app/application/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

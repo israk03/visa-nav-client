@@ -12,7 +12,7 @@ const MyVisas = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:3000/my-visas/${user.email}`)
+      fetch(`https://visa-nav-server.vercel.app/my-visas/${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           setVisas(data);
@@ -28,7 +28,7 @@ const MyVisas = () => {
     );
     if (!confirmDelete) return;
 
-    fetch(`http://localhost:3000/visa/${id}`, { method: "DELETE" })
+    fetch(`https://visa-nav-server.vercel.app/visa/${id}`, { method: "DELETE" })
       .then((res) => res.json())
       .then(() => {
         toast.success("Visa deleted successfully!");
