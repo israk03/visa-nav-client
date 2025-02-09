@@ -8,7 +8,9 @@ import banner2 from "../assets/passkontrolle.jpg";
 import banner3 from "../assets/Visa Banner - Passport2.png";
 import { Fade } from "react-awesome-reveal";
 import Lottie from "lottie-react";
-import visaAnimation from "../assets/visa-animation.json"; // Add a Lottie animation JSON file
+import visaAnimation from "../assets/visa-animation.json";
+import WhyChooseUs from "../components/WhyChooseUs";
+import UserTestimonials from "../components/UserTestimonials";
 
 const Home = () => {
   const [latestVisas, setLatestVisas] = useState([]);
@@ -68,25 +70,8 @@ const Home = () => {
       </div>
 
       {/*  Extra Sections with Animations */}
-      <Fade direction="up" delay={300}>
-        <div className="my-12">
-          <h2 className="text-2xl font-bold text-center">Why Choose Us?</h2>
-          <p className="text-center text-gray-600 mt-2">
-            We offer the fastest and most reliable visa processing services
-            worldwide.
-          </p>
-        </div>
-      </Fade>
-
-      <Fade direction="up" delay={600}>
-        <div className="my-12">
-          <h2 className="text-2xl font-bold text-center">User Testimonials</h2>
-          <p className="text-center text-gray-600 mt-2">
-            Hear from our satisfied customers who successfully got their visas
-            through us.
-          </p>
-        </div>
-      </Fade>
+      <WhyChooseUs></WhyChooseUs>
+      <UserTestimonials></UserTestimonials>
     </div>
   );
 };
